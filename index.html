@@ -4,38 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Netflix-like Streaming Site</title>
+    <title>Blue Themed Streaming Site</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #141414;
+            background-color: #0d1b2a; /* Dark blue */
             color: white;
             overflow-x: hidden;
-            transition: margin-left 0.3s;
         }
 
+        /* Header Styles */
         .header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background-color: transparent;
             display: flex;
-            justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
             z-index: 100;
-            transition: background-color 0.5s ease;
-        }
-
-        .header.scrolled {
-            background-color: rgba(20, 20, 20, 0.9);
+            background-color: rgba(13, 27, 42, 0.8); /* Slightly transparent dark blue */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
 
         .header img {
             height: 40px;
+            margin-right: 20px;
         }
 
         .nav-links {
@@ -48,59 +44,57 @@
             color: white;
             text-decoration: none;
             font-weight: bold;
-            padding: 5px 0;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(6, 105, 205, 0.8); /* Light blue background on hover */
+            color: white;
+            outline: 2px solid #0096ff; /* Blue outline on hover */
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
             position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            height: 2px;
-            width: 0;
-            background-color: #e50914;
-            transition: width 0.4s ease, left 0.4s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-            left: 0;
         }
 
         .search-bar {
-            display: none;
-            position: absolute;
-            top: 50px;
-            right: 20px;
-            background-color: #333;
-            border: none;
-            padding: 8px 15px;
+            padding: 8px;
+            border-radius: 24px;
+            border: 1px solid #444;
+            background-color: #1b2631; /* Darker blue */
             color: white;
-            border-radius: 5px;
             width: 200px;
+            transition: width 0.4s ease-in-out;
+        }
+
+        .search-bar:focus {
+            width: 300px;
+            outline: none;
+            border-color: #0096ff; /* Blue border */
         }
 
         .search-icon {
+            position: absolute;
+            right: 10px;
             cursor: pointer;
-            position: relative;
-            transition: color 0.3s;
+            color: white;
         }
 
-        .search-icon:hover {
-            color: #e50914;
-        }
-
+        /* Banner styles */
         .banner {
             height: 450px;
             background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8) 50%),
-                url('https://threepennypress.org/wp-content/uploads/2016/11/moana-poster.jpg') center/cover no-repeat;
+                url('https://lightbox-prod.imgix.net/images/assets/BANNER_WIDE_mac_11695239_A8D0E613-5EA5-49D9-9E797735C083C332.jpg') center/cover no-repeat;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            position: relative;
-            margin-top: 60px;
             padding: 20px;
+            margin-top: 60px;
         }
 
         .banner h1 {
@@ -114,7 +108,7 @@
         }
 
         .age-rating {
-            background-color: #e50914;
+            background-color: #0096ff; /* Bright blue */
             color: white;
             border-radius: 10px;
             padding: 5px 10px;
@@ -124,7 +118,7 @@
         }
 
         .play-button {
-            background-color: #e50914;
+            background-color: #0096ff; /* Bright blue */
             color: white;
             border: none;
             padding: 10px 15px;
@@ -136,41 +130,59 @@
         }
 
         .play-button:hover {
-            background-color: #f00612;
+            background-color: #0077cc; /* Darker blue */
         }
 
+        /* Section Title */
         .section-title {
             font-size: 24px;
             padding: 20px;
             margin: 0;
         }
 
+        /* Movie Section Styles */
         .movies {
             display: flex;
             overflow-x: auto;
             padding: 10px 20px;
             scroll-behavior: smooth;
+            padding-bottom: 60px; /* Space for footer */
         }
 
         .movie {
-            background-color: #333;
-            border-radius: 2px;
-            overflow: hidden;
+            background-color: #1b2631; /* Darker blue */
+            border-radius: 5px;
             margin-right: 20px;
             cursor: pointer;
-            flex: 0 0 auto;
-            width: 150px;
-            transition: transform 0.3s;
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         .movie img {
-            width: 100%;
-            height: auto;
+            width: 100%;           /* Maintain width */
+            height: 200px;         /* Fixed height for uniformity */
+            object-fit: cover;     /* Cover to maintain aspect ratio */
             transition: transform 0.3s;
         }
 
         .movie:hover {
             transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0, 150, 255, 0.6);
+        }
+
+        .movie-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.7);
+            width: 100%;
+            text-align: center;
+            padding: 5px 0;
+            font-size: 16px;
+            color: white;
         }
 
         /* Modal styles */
@@ -195,10 +207,6 @@
             background-color: #222;
             border-radius: 10px;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
         }
 
         .close-modal,
@@ -223,6 +231,7 @@
             right: 10px;
         }
 
+        /* Sidebar Styles */
         .sidebar {
             display: none;
             position: fixed;
@@ -239,7 +248,7 @@
         }
 
         .sidebar.open {
-            border-right: 5px solid #e50914;
+            border-right: 5px solid #0096ff; /* Bright blue */
             display: block;
         }
 
@@ -252,7 +261,7 @@
         }
 
         .sidebar a:hover {
-            background: #e50914;
+            background: #0096ff; /* Bright blue on hover */
         }
 
         /* Responsive Styles */
@@ -276,6 +285,10 @@
             .section-title {
                 font-size: 20px;
             }
+
+            .search-bar {
+                width: 150px; /* Minimum width for smaller screens */
+            }
         }
     </style>
 </head>
@@ -290,10 +303,13 @@
             <a href="#movies" onclick="loadPage('movies')">Movies</a>
             <a href="#my-list" onclick="loadPage('my-list')">My List</a>
         </div>
-        <div class="search-icon" onclick="toggleSearch()">
-            <i class="fas fa-search"></i>
+        <div class="search-container">
+            <input type="text" class="search-bar" id="searchBar" oninput="filterMovies()" placeholder="Search for movies...">
+            <i class="fas fa-search search-icon" onclick="toggleSearch()"></i>
         </div>
-        <input type="text" class="search-bar" id="searchBar" oninput="filterMovies()" placeholder="Search for movies...">
+        <div class="play-button" onclick="playFeaturedMovie()">
+            <i class="fas fa-play"></i> Play Imaginary
+        </div>
         <div class="hamburger" onclick="toggleSidebar()">
             <i class="fas fa-bars"></i>
         </div>
@@ -307,33 +323,38 @@
     </div>
 
     <div class="banner">
-        <h1>Moana</h1>
-        <p class="banner-description">An adventurous teenager sails out on a daring mission to save her people. During her journey, Moana meets the once-mighty demigod Maui, who guides her in her quest to become a master way-finder. Together they sail across the open ocean on an action-packed voyage, encountering enormous monsters and impossible odds.</p>
-        <div class="age-rating">PG</div>
-        <button class="play-button" onclick="playFeaturedMovie()">
-            <i class="fas fa-play"></i> Watch now
-        </button>
+        <h1>Imaginary</h1>
+        <p class="banner-description">
+            When Jessica moves back into her childhood home with her family, her youngest stepdaughter, Alice, finds a stuffed bear named Chauncey. As Alice's behavior becomes more and more concerning, Jessica intervenes only to realize that Chauncey is much more than the stuffed toy bear she believed him to be.
+        </p>
+        <div class="age-rating">PG-14</div>
     </div>
 
-    <h2 class="section-title">Trending Now</h2>
+    <h2 class="section-title">Staff Picks</h2>
     <div class="movies" id="moviesContainer1">
         <div class="movie" data-url="https://drive.google.com/file/d/1W0OfyIS_7f0DKjC6x1bVLI4WBFabZXis/preview">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgH4FRaQ9Raq7DJoaCWv824nJwQIdwq4v9TQ&s" alt="Movie 1" />
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgH4FRaQ9Raq7DJoaCWv824nJwQIdwq4v9TQ&s" alt="Garfield Movie" />
+            <div class="movie-title">Garfield Movie</div>
         </div>
-        <div class="movie" data-url="https://drive.google.com/file/d/1W20OfyIS_7f0DKjC6x1bVLI4WBFabZXis/preview">
-            <img src="https:// PlacetoImageLink.com/image2.jpg" alt="Movie 2" />
+        <div class="movie" data-url="https://drive.google.com/file/d/1EsX8k7nfYQrzC6apqJqnyfH7HLAHl31G/preview">
+            <img src="https://i.ebayimg.com/images/g/qgQAAOSwoHhgwgFe/s-l1200.jpg" alt="Moana" />
+            <div class="movie-title">Moana</div>
         </div>
         <div class="movie" data-url="https://drive.google.com/file/d/1W30OfyIS_7f0DKjC6x1bVLI4WBFabZXis/preview">
             <img src="https:// PlacetoImageLink.com/image3.jpg" alt="Movie 3" />
+            <div class="movie-title">Movie 3</div>
         </div>
         <div class="movie" data-url="https://drive.google.com/file/d/1W40OfyIS_7f0DKjC6x1bVLI4WBFabZXis/preview">
             <img src="https:// PlacetoImageLink.com/image4.jpg" alt="Movie 4" />
+            <div class="movie-title">Movie 4</div>
         </div>
         <div class="movie" data-url="https://drive.google.com/file/d/1W50OfyIS_7f0DKjC6x1bVLI4WBFabZXis/preview">
             <img src="https:// PlacetoImageLink.com/image5.jpg" alt="Movie 5" />
+            <div class="movie-title">Movie 5</div>
         </div>
         <div class="movie" data-url="https://drive.google.com/file/d/1W60OfyIS_7f0DKjC6x1bVLI4WBFabZXis/preview">
             <img src="https:// PlacetoImageLink.com/image6.jpg" alt="Movie 6" />
+            <div class="movie-title">Movie 6</div>
         </div>
     </div>
 
@@ -358,27 +379,23 @@
         const fullscreenIcon = document.getElementById('fullscreenIcon');
         let isFullscreen = false; // Track fullscreen state
 
+        // Load page function (dummy for now)
+        function loadPage(page) {
+            alert("Loading " + page + "...");
+        }
+
         function toggleSidebar() {
-            if (sidebar.style.display === "block") {
-                sidebar.style.display = "none";
-                document.body.style.marginLeft = "0";
-                sidebar.classList.remove('open');
-            } else {
-                sidebar.style.display = "block";
-                document.body.style.marginLeft = "250px";
-                sidebar.classList.add('open');
-            }
+            sidebar.classList.toggle('open');
+            sidebar.style.display = sidebar.style.display === "block" ? "none" : "block";
+            document.body.style.marginLeft = sidebar.style.display === "none" ? "0" : "250px";
         }
 
         function toggleSearch() {
-            searchBar.style.display = searchBar.style.display === "none" || searchBar.style.display === "" ? "block" : "none";
-            if (searchBar.style.display === "block") {
-                searchBar.focus();
-            }
+            searchBar.focus();
         }
 
         function playFeaturedMovie() {
-            const url = 'https://drive.google.com/file/d/1W0OfyIS_7f0DKjC6x1bVLI4WBFabZXis/preview';
+            const url = 'https://drive.google.com/file/d/1XkYunzvu-s28Ttc90NesKwdbloUUWnYv/preview';
             movieEmbed.src = url;
             modal.style.display = 'flex'; // Show modal
             isFullscreen = false; // Reset fullscreen state
@@ -397,7 +414,7 @@
                     modal.requestFullscreen();
                 } else if (modal.mozRequestFullScreen) { // Firefox
                     modal.mozRequestFullScreen();
-                } else if (modal.webkitRequestFullscreen) { // Chrome, Safari and Opera
+                } else if (modal.webkitRequestFullscreen) { // Chrome, Safari, and Opera
                     modal.webkitRequestFullscreen();
                 } else if (modal.msRequestFullscreen) { // IE/Edge
                     modal.msRequestFullscreen();
@@ -431,7 +448,8 @@
             const query = searchBar.value.toLowerCase();
             const movies = document.querySelectorAll('.movie');
             movies.forEach(movie => {
-                movie.style.display = movie.alt.toLowerCase().includes(query) ? 'flex' : 'none';
+                const title = movie.querySelector('.movie-title').innerText.toLowerCase();
+                movie.style.display = title.includes(query) ? 'flex' : 'none';
             });
         }
 
