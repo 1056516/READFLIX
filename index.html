@@ -151,7 +151,7 @@
 
         .movie {
             background-color: #1b2631; /* Darker blue */
-            border-radius: 5px;
+            border-radius: 13px; /* Border radius for Disney+ look */
             margin-right: 20px;
             cursor: pointer;
             position: relative;
@@ -159,12 +159,15 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            width: 284px; /* Width according to aspect ratio 1.90:1 */
+            height: 150px; /* Height */
         }
 
         .movie img {
             width: 100%;           /* Maintain width */
-            height: 200px;         /* Fixed height for uniformity */
+            height: 100%;          /* Full height for the container */
             object-fit: cover;     /* Cover to maintain aspect ratio */
+            border-radius: 13px 13px 0 0; /* Rounded corners for the top */
             transition: transform 0.3s;
         }
 
@@ -289,6 +292,10 @@
             .search-bar {
                 width: 150px; /* Minimum width for smaller screens */
             }
+
+            .movie img {
+                height: 100%; /* Adjust height for mobile if necessary */
+            }
         }
     </style>
 </head>
@@ -333,11 +340,11 @@
     <h2 class="section-title">Staff Picks</h2>
     <div class="movies" id="moviesContainer1">
         <div class="movie" data-url="https://drive.google.com/file/d/1W0OfyIS_7f0DKjC6x1bVLI4WBFabZXis/preview">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgH4FRaQ9Raq7DJoaCWv824nJwQIdwq4v9TQ&s" alt="Garfield Movie" />
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ801LnceBZ8ENO04SW7GvgzzWAw0tRtqjcrtQ6sdS1mLd1uoE:https://cdn.flickeringmyth.com/wp-content/uploads/2023/12/Garfield-poster-1.jpg&s" alt="Garfield Movie" />
             <div class="movie-title">Garfield Movie</div>
         </div>
         <div class="movie" data-url="https://drive.google.com/file/d/1EsX8k7nfYQrzC6apqJqnyfH7HLAHl31G/preview">
-            <img src="https://i.ebayimg.com/images/g/qgQAAOSwoHhgwgFe/s-l1200.jpg" alt="Moana" />
+            <img src="https://scera.org/wp-content/uploads/2017/03/disney-moana-movie-poster-wallpaper-6677.jpg" alt="Moana" />
             <div class="movie-title">Moana</div>
         </div>
         <div class="movie" data-url="https://drive.google.com/file/d/1W30OfyIS_7f0DKjC6x1bVLI4WBFabZXis/preview">
