@@ -1,9 +1,8 @@
-  <link rel="icon" type="image/x-icon" href="https://i.ibb.co/0VcbsHp/Screenshot-2024-10-07-8-27-45-PM.png">
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <link rel="icon" type="image/x-icon" href="https://i.ibb.co/0VcbsHp/Screenshot-2024-10-07-8-27-45-PM.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FlixiCinema</title>
@@ -34,6 +33,12 @@
         .header img {
             height: 40px;
             margin-right: 20px;
+            position: relative;
+            transition: transform 0.3s; /* Smooth transition for scaling */
+        }
+
+        .header img:hover {
+            transform: scale(0.95); /* Shrink header logo on hover */
         }
 
         .nav-links {
@@ -97,6 +102,28 @@
             justify-content: flex-end;
             padding: 20px;
             margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s; /* Smooth transition for scaling */
+        }
+
+        /* Banner hover effect */
+        .banner:hover {
+            transform: scale(0.95); /* Shrink banner image */
+        }
+
+        .banner:hover::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 10px; /* Adjusted for matching */
+            border: 5px solid transparent;
+            background: linear-gradient(0deg, rgba(0, 150, 255, 0.6), rgba(255, 0, 150, 0.6));
+            animation: wave-outer 1.5s infinite; /* Animated outline effect */
+            z-index: 1; /* Put it behind the image */
         }
 
         .banner h1 {
@@ -166,16 +193,20 @@
         }
 
         .movie img {
-            width: 100%;           /* Maintain width */
-            height: 100%;          /* Full height for the container */
-            object-fit: cover;     /* Cover to maintain aspect ratio */
+            width: 100%; /* Maintain width */
+            height: 100%; /* Full height for the container */
+            object-fit: cover; /* Cover to maintain aspect ratio */
             border-radius: 13px 13px 0 0; /* Rounded corners for the top */
-            transition: transform 0.3s;
+            transition: transform 0.3s; /* Smooth transition for scaling */
         }
 
         .movie:hover {
-            transform: scale(1.05);
+            transform: scale(1.05); /* Enlarges the movie container */
             box-shadow: 0 0 10px rgba(0, 150, 255, 0.6);
+        }
+
+        .movie:hover img {
+            transform: scale(0.95); /* Shrink image on hover */
         }
 
         .movie-title {
@@ -299,6 +330,30 @@
                 height: 100%; /* Adjust height for mobile if necessary */
             }
         }
+
+        /* Water outline effect keyframes */
+        @keyframes wave-outer {
+            0% {
+                transform: scale(0.95);
+                opacity: 0.5;
+            }
+
+            25% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(0.95);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 0;
+            }
+        }
+
     </style>
 </head>
 
@@ -334,7 +389,7 @@
     <div class="banner">
         <h1>Deadpool 2</h1>
         <p class="banner-description">
-           Foul-mouthed mutant mercenary Wade Wilson (a.k.a. Deadpool) assembles a team of fellow mutant rogues to protect a young boy with abilities from the brutal, time-traveling cyborg Cable.
+            Foul-mouthed mutant mercenary Wade Wilson (a.k.a. Deadpool) assembles a team of fellow mutant rogues to protect a young boy with abilities from the brutal, time-traveling cyborg Cable.
         </p>
         <div class="age-rating">PG-13</div>
     </div>
@@ -342,7 +397,7 @@
     <h2 class="section-title">Staff Picks</h2>
     <div class="movies" id="moviesContainer1">
         <div class="movie" data-url="https://drive.google.com/file/d/1W0OfyIS_7f0DKjC6x1bVLI4WBFabZXis/preview">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ801LnceBZ8ENO04SW7GvgzzWAw0tRtqjcrtQ6sdS1mLd1uoE:https://cdn.flickeringmyth.com/wp-content/uploads/2023/12/Garfield-poster-1.jpg&s" alt="Garfield Movie" />
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ801LnceBZ8ENO04SW7GvgzzWAw0tRtqjcrtQ6sdS1mLd1uoE" alt="Garfield Movie" />
             <div class="movie-title">Garfield Movie</div>
         </div>
         <div class="movie" data-url="https://drive.google.com/file/d/1EsX8k7nfYQrzC6apqJqnyfH7HLAHl31G/preview">
@@ -350,15 +405,15 @@
             <div class="movie-title">Moana</div>
         </div>
         <div class="movie" data-url="https://drive.google.com/file/d/1WnfCHnjlcN7joibU1e0RieYJNFBPgXRn/preview">
-            <img src="https://imageio.forbes.com/specials-images/imageserve/66d7eba17b9960b8708c5da6/-Beetlejuice-Beetlejuice--partial-poster-/0x0.jpg?format=jpg&crop=1773,998,x0,y215,safe&width=960" alt="Movie 3" />
+            <img src="https://imageio.forbes.com/specials-images/imageserve/66d7eba17b9960b8708c5da6/-Beetlejuice-Beetlejuice--partial-poster-/0x0.jpg?format=jpg&crop=1773,998,x0,y215,safe&width=960" alt="Beetle Juice Beetle Juice" />
             <div class="movie-title">Beetle Juice Beetle Juice</div>
         </div>
         <div class="movie" data-url="https://drive.google.com/file/d/1GEqoG7q-tEz_pOpPqOWe_cnSczCxV9PW/preview">
-            <img src="https://sportshub.cbsistatic.com/i/2023/12/13/4da0a921-d6db-424c-926c-df03c9b864d7/ryan-reynolds-john-krasinski-if-poster-header.jpg" alt="Movie 4" />
+            <img src="https://sportshub.cbsistatic.com/i/2023/12/13/4da0a921-d6db-424c-926c-df03c9b864d7/ryan-reynolds-john-krasinski-if-poster-header.jpg" alt="IF" />
             <div class="movie-title">IF</div>
         </div>
         <div class="movie" data-url="https://drive.google.com/file/d/1XkYunzvu-s28Ttc90NesKwdbloUUWnYv/preview">
-            <img src="https://www.joblo.com/wp-content/uploads/2023/11/imaginary-blumhouse-1280x720.jpg" alt="Movie 5" />
+            <img src="https://www.joblo.com/wp-content/uploads/2023/11/imaginary-blumhouse-1280x720.jpg" alt="Imaginary" />
             <div class="movie-title">Imaginary</div>
         </div>
         <div class="movie" data-url="https://drive.google.com/file/d/1W60OfyIS_7f0DKjC6x1bVLI4WBFabZXis/preview">
@@ -430,6 +485,7 @@
                 }
                 isFullscreen = true; // Set state to fullscreen
                 fullscreenIcon.innerHTML = '<i class="fas fa-compress"></i>'; // Change icon
+                document.body.style.overflow = 'hidden'; // Prevent scrolling while in fullscreen
             } else {
                 exitFullscreen();
             }
@@ -441,6 +497,7 @@
             }
             isFullscreen = false; // Reset state
             fullscreenIcon.innerHTML = '<i class="fas fa-expand"></i>'; // Reset icon
+            document.body.style.overflow = 'auto'; // Restore scrolling
         }
 
         document.querySelectorAll('.movie').forEach(movie => {
